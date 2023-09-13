@@ -2,11 +2,21 @@ console.log("Hola Mundo")
 
 let intentos = 6;
 let reint = 0;
+// https://random-word-api.herokuapp.com/word?length=5;
+let palabra;
 
-let diccionario = ['APPLE', 'HURLS', 'WINGS', 'YOUTH']
+fetch('https://random-word-api.herokuapp.com/word?length=5&&lang=es' )
+    .then (response => response.json())
+    .then (response =>{
+        console.log(response)
+        palabra = response [0].toUpperCase()
+    })
+    .catch(err => console.error(err))
 
-const palabra = diccionario[Math.floor(Math.random() * diccionario.length)];
-console.log(palabra);
+// let diccionario = ['APPLE', 'HURLS', 'WINGS', 'YOUTH']
+
+// const palabra = diccionario[Math.floor(Math.random() * diccionario.length)];
+// console.log(palabra);
 
 window.addEventListener('load', init)
 const button = document.getElementById("guess-button");
@@ -16,7 +26,7 @@ const input = document.getElementById("guess-input");
 const valor = input.value;
 
 function intentar(){
-
+    console.log(palabra);
     const GRID = document.getElementById("grid");
     const ROW = document.createElement('div');
     ROW.className = 'row';
